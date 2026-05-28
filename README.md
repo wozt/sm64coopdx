@@ -1,5 +1,12 @@
 ![sm64coopdx Logo](textures/segment2/custom_coopdx_logo.rgba32.png)
 
+This fork is modifed to get this working on raspberry pi 5
+
+build with :
+
+'''make clean && make -j$(nproc)'''
+
+
 sm64coopdx is an online multiplayer project for the Super Mario 64 PC port that synchronizes all entities and every level for multiple players. The project was started by the Coop Deluxe Team. The purpose is to actively maintain and improve, but also continue sm64ex-coop, created by djoslin0. More features, customization, and power to the Lua API allow modders and players to enjoy Super Mario 64 more than ever!
 
 Feel free to report bugs or contribute to the project. 
