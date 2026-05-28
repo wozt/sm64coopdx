@@ -695,24 +695,24 @@ static void gfx_opengl_init(void) {
 
     tex_cache_size = TEX_CACHE_STEP;
     tex_cache = calloc(tex_cache_size, sizeof(struct GLTexture));
-    if (!tex_cache) sys_fatal("out of memory allocating texture cache");
+    if (!tex_cache)
+        sys_fatal("out of memory allocating texture cache");
 
     // check GL version
     int vmajor = 0;
     int vminor = 0;
     bool is_es = false;
     gl_get_version(&vmajor, &vminor, &is_es);
+
     if (vmajor < 2 && vminor < 1 && !is_es)
-        sys_fatal("OpenGL 2.1+ is required.\nReported version: %s%d.%d", is_es ? "ES" : "", vmajor, vminor);
+        sys_fatal("OpenGL 2.1+ is required.\nReported version: %s%d.%d",
+                  is_es ? "ES" : "", vmajor, vminor);
 
     glGenBuffers(1, &opengl_vbo);
-
     glBindBuffer(GL_ARRAY_BUFFER, opengl_vbo);
 
-    if (vmajor >= 3 && !is_es) {
-        glGenVertexArrays(1, &opengl_vao);
-        glBindVertexArray(opengl_vao);
-    }
+    // VAO setup (Pi / GLES safe)
+    opengl_vao = 0;   // <-- FIX APPLIQUÉ (remplace glGenVertexArrays)
 
     glDepthFunc(GL_LEQUAL);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
